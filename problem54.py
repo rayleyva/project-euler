@@ -68,6 +68,13 @@ def poker_sort(hand):
     for k, v in data.items():
         v.sort()
         v.reverse()
+    # correct for 5-card hands (i.e., 2x3-of-a-kind or 3x2-of-a-kind)
+    if len(data[3]) > 1:
+        data[2].append(data[3][-1])
+        del(data[3][-1])
+    if len(data[2]) > 2:
+        data[1].append(data[2][-1])
+        del(data[2][-1])
     return data
 
 def score_hand(hand):
@@ -118,22 +125,27 @@ def winner(*hands):
         for i in range(len(best)):
             best_data.append(poker_sort(best[i]))
 
-        tmp = []    
+        tmp = []
+        cards_available = 5
+        winner = ''
         for i in range(4, 0, -1):
-            high = 0
+            high = []
             for j in range(len(best)):
-                for k in range(len(best_data[j][i])):
-                    if best_data[j][i][k] == high:
-                        tmp.append(best[j])
-                    elif best_data[j][i][k] > high:
-                        tmp = [best[j]]
-                        high = best_data[j][i][k]
+                best_data[j][i] = best_data[j][i][:cards_available]
+                if best_data[j][i] == high:
+                    tmp.append(best[j])
+                elif best_data[j][i] > high:
+                    tmp = [best[j]]
+                    high = best_data[j][i]
+            cards_available -= (len(high) * i)
+            winner += ''.join([CARDS[x]*i for x in high])
             if len(tmp) == 1:
                 return tmp[0]
             elif len(tmp) > 1:
                 tmp = []
                 pass
-    return None # it's a tie!
+    
+    return 'Tie: %s' % (winner)
     
 def values_from_hand(hand):
     """
