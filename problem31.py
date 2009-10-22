@@ -1,6 +1,21 @@
-# 1p, 2p, 5p, 10p, 20p, 50p, £1 (100p) and £2 (200p).
-coins = [1, 2, 5, 10, 20, 50, 100, 200]
-
+coins = [200, 100, 50, 20, 10, 5, 2, 1]
 goal = 200
 
-# recursion?
+def chase(coins, goal):
+    total = 0
+    x = goal / coins[0]
+    
+    new_coins = coins[1:]
+    
+    if len(new_coins):
+        for i in range(x, -1, -1):
+            new_goal = goal - (i * coins[0])
+            if new_goal == 0:
+                total += 1
+            else:
+                total += chase(new_coins, new_goal)
+    else:
+        total = 1
+    return total
+
+print chase(coins, goal)
