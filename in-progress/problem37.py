@@ -7,23 +7,21 @@ def is_prime(n):
     return True
 
 valid_digits = [3, 7, 9]
-possibles = valid_digits
+possibles = [3, 7, 9]
 
-# for argument's sake say the biggest
-# number is 7 digits long
-for i in range(3):
-    new_ones = []
-    for possible in possibles:
+# create a bunch of 
+i = 0
+for i in range(6):
+    for i in range(len(possibles)):
         for valid_digit in valid_digits:
-            new_ones.append(int(str(possible) + str(valid_digit)))
-    possibles += new_ones
+            possibles.append(int(str(possibles[i]) + str(valid_digit)))
 
 possibles = set(possibles)
-
 primes = 0
+primes = []
 
 for possible in possibles:
     if is_prime(possible):
-        primes += 1
+        primes.append(possible)
 
-print primes
+
