@@ -22,15 +22,12 @@ max_sum = 0
 # sequence, so guess the smallest number expected
 min_expected = 100
 
-done = False
 primes = [2]
 i = 3
 while i < (target / min_expected):
     if is_prime(i):
         primes.append(i)
     i += 2
-
-working_list = list(primes)
 
 i = 0
 while i < (len(primes) - max_sequence):
