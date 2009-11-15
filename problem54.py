@@ -23,7 +23,8 @@ def flush(hand):
     """
     suits = { 'C': 0, 'S': 0, 'D': 0, 'H': 0 }
     for card in hand:
-        suits[card[1]] += 1
+        if suits[card[1]] < 5:
+            suits[card[1]] += 1
     return 5 in suits.values()
 
 def straight(hand):
