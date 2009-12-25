@@ -48,8 +48,7 @@ def run_test(primes):
                             return
 
 # remove 2 & 5
-primes = primes[1:]
+del(primes[0])
 del(primes[1])
 
-print "Testing approx %d combinations" % (len(primes)**5)
 run_test(primes)
