@@ -39,7 +39,7 @@ func is_palindrome(digits []int) bool {
 func main() {
     largest := 1
     for i := 100; i < 1000; i++ {
-        for j := 100; j < 1000; j++ {
+        for j := i; j < 1000; j++ {
             product := i * j
             if is_palindrome(get_digits(product)) && product > largest {
                 largest = product
